@@ -15,4 +15,4 @@ Once the necessary JAR file has been generated (see *'Installation'* section) th
 
     java -jar <project-root-dir>/target/rest-test-1.0.0.jar
 
-A log file called `'rest-test.log'` will be generated in the directory from which this command is run.
+A log file called `'rest-test.log'` will be generated in the directory from which this command is run. In the event of any test failures this file will provide error details and some basic debug information.
