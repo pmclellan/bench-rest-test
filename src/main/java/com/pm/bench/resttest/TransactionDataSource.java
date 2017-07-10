@@ -1,55 +1,42 @@
 package com.pm.bench.resttest;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
+import static java.util.Objects.requireNonNull;
+
 import java.util.Iterator;
-import java.util.List;
+import java.util.function.Function;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
-import com.google.common.collect.ImmutableList;
-import com.pm.bench.resttest.PagedIterator.PageLoader;
-
+@Component
 public class TransactionDataSource
 {
-	private static final LocalDate TODAY = LocalDate.now();
-	private static final LocalDate TOMORROW = TODAY.plusDays( 1 );
-	private static final LocalDate TODAY_PLUS_FIVE = TODAY.plusDays( 5 );
-	private static final LocalDate TODAY_PLUS_EIGHT = TODAY.plusDays( 8 );
-
-	private final List<Transaction> data = ImmutableList.of(
-		new Transaction( TODAY, new BigDecimal( "10.10" ) ),
-		new Transaction( TODAY, new BigDecimal( "10.10" ) ),
-		new Transaction( TOMORROW, new BigDecimal( "10.10" ) ),
-		new Transaction( TOMORROW, new BigDecimal( "10.10" ) ),
-		new Transaction( TODAY, new BigDecimal( "10.10" ) ),
-		new Transaction( TODAY_PLUS_FIVE, new BigDecimal( "10.100" ) ),
-		new Transaction( TODAY_PLUS_FIVE, new BigDecimal( "10.10" ) ),
-		new Transaction( TODAY_PLUS_FIVE, new BigDecimal( "10.10" ) ),
-		new Transaction( TODAY_PLUS_EIGHT, new BigDecimal( "10.10" ) ) );
-
-	private final PageLoader<Transaction> loader = new PageLoader<Transaction>()
-		{
-			@Override
-			public @Nullable List<Transaction> getPage( int pageNumber )
-			{
-				if ( pageNumber == 2 )
-				{
-					return data.subList( 4, 8 );
-				}
-				else if ( pageNumber == 3 )
-				{
-					return data.subList( 8, 9 );
-				}
-				else
-				{
-					return null;
-				}
-			}
-		};
-
+	private final RestTemplate restTemplate;
+	private final Function<Integer, String> urlGenerator;
+	
+	@Autowired
+	public TransactionDataSource(
+		@NonNull final RestTemplate restTemplate,
+		@Qualifier( "urlGenerator" ) @NonNull final Function<Integer, String> urlGenerator )
+	{
+		this.restTemplate = requireNonNull( restTemplate );
+		this.urlGenerator = requireNonNull( urlGenerator );
+	}
+	
 	public Iterator<Transaction> getData()
 	{
-		return new PagedIterator<Transaction>( data.size(), data.subList( 0, 4 ), loader );
+		TransactionPage firstPage = getDataPage( 1 );
+		return new PagedIterator<>(
+			firstPage.getTotalCount(),
+			firstPage.getTransactions(),
+			(i) -> getDataPage( i ).getTransactions() );
+	}
+	
+	private TransactionPage getDataPage( int pageNumber )
+	{
+		return restTemplate.getForObject( urlGenerator.apply( pageNumber ), TransactionPage.class );
 	}
 }

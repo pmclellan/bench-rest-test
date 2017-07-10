@@ -1,9 +1,15 @@
 package com.pm.bench.resttest;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.stereotype.Component;
+
+@Component
 public class RestTest
 {
 	private final TransactionDataSource dataSource;
 
+	@Autowired
 	public RestTest( final TransactionDataSource dataSource )
 	{
 		this.dataSource = dataSource;
@@ -19,13 +25,17 @@ public class RestTest
 			dailyBalanceCalc.accept( tx );
 		} );
 
-		System.out.println( totalBalanceCalc.getTotal() );
-		System.out.println( dailyBalanceCalc.getTotals() );
+		System.out.println( "Total Balance: " + totalBalanceCalc.getTotal() );
+
+		dailyBalanceCalc.getTotals().entrySet().stream()
+						.forEach( ( e ) -> System.out.println( "Daily Balance: " + e.getKey() + " => " + e.getValue() ) );
 	}
 
+	@SuppressWarnings( "resource" )
 	public static void main( String[] args ) throws Exception
 	{
-		RestTest test = new RestTest( new TransactionDataSource() );
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext( SpringConfig.class );
+		RestTest test = context.getBean( RestTest.class );
 		test.runTest();
 	}
 }
