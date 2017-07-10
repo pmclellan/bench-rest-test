@@ -5,7 +5,7 @@
 
 	<groupId>com.pm.bench</groupId>
 	<artifactId>rest-test</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
 	<properties>
@@ -107,6 +107,7 @@
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>3.0.0</version>
 				<configuration>
+					<appendAssemblyId>false</appendAssemblyId>
 					<archive>
 						<manifest>
 							<mainClass>com.pm.bench.resttest.RestTest</mainClass>
