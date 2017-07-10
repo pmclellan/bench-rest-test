@@ -19,11 +19,11 @@ import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
 import com.google.common.base.Preconditions;
-import com.pm.bench.resttest.PagedIterator;
 import com.pm.bench.resttest.datasource.DataSourceException;
 import com.pm.bench.resttest.datasource.MalformedDataException;
 import com.pm.bench.resttest.transaction.Transaction;
 import com.pm.bench.resttest.transaction.TransactionPage;
+import com.pm.bench.resttest.util.PagedIterator;
 
 @Component
 public class TransactionDataSource

@@ -1,4 +1,4 @@
-package com.pm.bench.resttest;
+package com.pm.bench.resttest.util;
 
 import static java.util.Objects.requireNonNull;
 

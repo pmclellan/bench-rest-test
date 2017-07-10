@@ -1,4 +1,4 @@
-package com.pm.bench.resttest;
+package com.pm.bench.resttest.util;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -14,7 +14,8 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.google.common.collect.Lists;
-import com.pm.bench.resttest.PagedIterator.PageLoader;
+import com.pm.bench.resttest.util.PagedIterator;
+import com.pm.bench.resttest.util.PagedIterator.PageLoader;
 
 @SuppressWarnings( "null" )
 @RunWith( MockitoJUnitRunner.class )
