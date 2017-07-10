@@ -1,4 +1,4 @@
-package com.pm.bench.resttest;
+package com.pm.bench.resttest.calculation;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -8,6 +8,9 @@ import java.time.LocalDate;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import com.pm.bench.resttest.calculation.TotalBalanceCalculator;
+import com.pm.bench.resttest.transaction.Transaction;
 
 public class TotalBalanceCalculatorTest
 {

@@ -4,6 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
+import com.pm.bench.resttest.calculation.DailyBalanceCalculator;
+import com.pm.bench.resttest.calculation.TotalBalanceCalculator;
+import com.pm.bench.resttest.datasource.rest.TransactionDataSource;
+
 @Component
 public class RestTest
 {

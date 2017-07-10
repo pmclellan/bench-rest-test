@@ -1,6 +1,5 @@
-package com.pm.bench.resttest;
+package com.pm.bench.resttest.transaction;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -8,7 +7,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.ImmutableList;
 
 public class TransactionPage
@@ -21,9 +20,9 @@ public class TransactionPage
 
 	@JsonCreator
 	public TransactionPage(
-		@JsonProperty( "totalCount" ) int totalCount,
-		@JsonProperty( "page" ) int pageNumber,
-		@JsonProperty( "transactions" ) @Nullable List<Transaction> transactions )
+		@JsonProperty( "totalCount" ) final int totalCount,
+		@JsonProperty( "page" ) final int pageNumber,
+		@JsonProperty( "transactions" ) @Nullable final List<Transaction> transactions )
 	{
 		this.totalCount = totalCount;
 		this.pageNumber = pageNumber;
@@ -49,9 +48,13 @@ public class TransactionPage
 		return transactions;
 	}
 	
-	public static void main(String[] args ) throws Exception
+	@Override
+	public String toString()
 	{
-		ObjectMapper mapper = new ObjectMapper();
-		System.out.println( mapper.writeValueAsString( new TransactionPage( 5, 7, new ArrayList<>() ) ) );
+		return MoreObjects.toStringHelper( this )
+						.add( "totalCount", totalCount )
+						.add( "pageNumber", pageNumber )
+						.add( "transactions", transactions )
+						.toString();
 	}
 }

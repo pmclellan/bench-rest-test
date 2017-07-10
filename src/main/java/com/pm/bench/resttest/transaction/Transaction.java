@@ -1,4 +1,4 @@
-package com.pm.bench.resttest;
+package com.pm.bench.resttest.transaction;
 
 import static java.util.Objects.requireNonNull;
 
@@ -9,6 +9,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
 
 public class Transaction
 {
@@ -39,5 +40,14 @@ public class Transaction
 	public BigDecimal getAmount()
 	{
 		return amount;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return MoreObjects.toStringHelper( this )
+						.add( "transactionDate", transactionDate )
+						.add( "amount", amount )
+						.toString();
 	}
 }

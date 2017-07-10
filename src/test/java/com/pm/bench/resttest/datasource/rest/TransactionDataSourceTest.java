@@ -1,4 +1,4 @@
-package com.pm.bench.resttest;
+package com.pm.bench.resttest.datasource.rest;
 
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
@@ -23,6 +23,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.google.common.collect.Iterators;
+import com.pm.bench.resttest.datasource.rest.TransactionDataSource;
+import com.pm.bench.resttest.transaction.Transaction;
+import com.pm.bench.resttest.transaction.TransactionPage;
 
 public class TransactionDataSourceTest
 {

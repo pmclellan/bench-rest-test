@@ -1,4 +1,4 @@
-package com.pm.bench.resttest;
+package com.pm.bench.resttest.datasource.rest;
 
 import static java.util.Objects.requireNonNull;
 
@@ -10,6 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+
+import com.pm.bench.resttest.PagedIterator;
+import com.pm.bench.resttest.transaction.Transaction;
+import com.pm.bench.resttest.transaction.TransactionPage;
 
 @Component
 public class TransactionDataSource

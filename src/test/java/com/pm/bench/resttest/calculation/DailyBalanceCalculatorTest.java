@@ -1,4 +1,4 @@
-package com.pm.bench.resttest;
+package com.pm.bench.resttest.calculation;
 
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.is;
@@ -10,6 +10,9 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import com.pm.bench.resttest.calculation.DailyBalanceCalculator;
+import com.pm.bench.resttest.transaction.Transaction;
 
 public class DailyBalanceCalculatorTest
 {

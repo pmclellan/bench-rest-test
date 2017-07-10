@@ -1,4 +1,4 @@
-package com.pm.bench.resttest;
+package com.pm.bench.resttest.calculation;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -9,6 +9,8 @@ import java.util.function.Consumer;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+
+import com.pm.bench.resttest.transaction.Transaction;
 
 public class DailyBalanceCalculator implements Consumer<Transaction>
 {
