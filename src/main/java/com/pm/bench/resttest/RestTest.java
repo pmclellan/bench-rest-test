@@ -15,7 +15,7 @@ public class RestTest
 		DailyBalanceCalculator dailyBalanceCalc = new DailyBalanceCalculator();
 		
 		dataSource.getData()
-				.forEach( tx -> { totalBalanceCalc.accept( tx ); dailyBalanceCalc.accept( tx ); } );
+				.forEachRemaining( tx -> { totalBalanceCalc.accept( tx ); dailyBalanceCalc.accept( tx ); } );
 		
 		System.out.println( totalBalanceCalc.getTotal() );
 		System.out.println( dailyBalanceCalc.getTotals() );
