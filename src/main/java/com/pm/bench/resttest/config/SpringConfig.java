@@ -14,7 +14,7 @@ public class SpringConfig
 	@Bean( "urlGenerator" )
 	public Function<Integer, String> getUrlGenerator()
 	{
-		return (i) -> "http://resttest.bench.co/trantions/" + i + ".json";
+		return (i) -> "http://resttest.bench.co/transactions/" + i + ".json";
 	}
 	
 	@Bean
