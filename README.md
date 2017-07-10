@@ -14,3 +14,5 @@ This will generate the necessary executable JAR in your `'<project-root-dir>/tar
 Once the necessary JAR file has been generated (see *'Installation'* section) the test can be run by executing the following command:
 
     java -jar <project-root-dir>/target/rest-test-1.0.0.jar
+
+A log file called `'rest-test.log'` will be generated in the directory from which this command is run.
