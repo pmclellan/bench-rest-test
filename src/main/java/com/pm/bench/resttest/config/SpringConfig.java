@@ -1,4 +1,4 @@
-package com.pm.bench.resttest;
+package com.pm.bench.resttest.config;
 
 import java.util.function.Function;
 
@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
-@ComponentScan
+@ComponentScan( "com.pm.bench.resttest" )
 public class SpringConfig
 {
 	@Bean( "urlGenerator" )
