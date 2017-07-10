@@ -7,8 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * {@link Iterator} implementation that can be used to page through large data sets without having to
@@ -29,8 +29,8 @@ public class PagedIterator<T> implements Iterator<T>
 
 	public PagedIterator(
 		int totalElements,
-		@NonNull final List<T> initialData,
-		@NonNull final PageLoader<T> pageLoader )
+		@Nonnull final List<T> initialData,
+		@Nonnull final PageLoader<T> pageLoader )
 	{
 		this.totalElements = totalElements;
 		this.currentData = new ArrayList<>( requireNonNull( initialData ) );

@@ -16,6 +16,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import com.google.common.collect.Lists;
 import com.pm.bench.resttest.PagedIterator.PageLoader;
 
+@SuppressWarnings( "null" )
 @RunWith( MockitoJUnitRunner.class )
 public class PagedIteratorTest
 {

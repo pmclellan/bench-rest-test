@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
+import javax.annotation.Nonnull;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -16,29 +16,29 @@ import com.google.common.base.MoreObjects;
  */
 public class Transaction
 {
-	@NonNull
+	@Nonnull
 	private final LocalDate transactionDate;
 
-	@NonNull
+	@Nonnull
 	private final BigDecimal amount;
 
 	@JsonCreator
 	public Transaction(
-		@JsonProperty( value = "Date", required = true ) @NonNull final LocalDate transactionDate,
-		@JsonProperty( value = "Amount", required = true ) @NonNull final BigDecimal amount )
+		@JsonProperty( value = "Date", required = true ) @Nonnull final LocalDate transactionDate,
+		@JsonProperty( value = "Amount", required = true ) @Nonnull final BigDecimal amount )
 	{
 		this.transactionDate = requireNonNull( transactionDate );
 		this.amount = requireNonNull( amount );
 	}
 
-	@NonNull
+	@Nonnull
 	@JsonProperty( "Date" )
 	public LocalDate getTransactionDate()
 	{
 		return transactionDate;
 	}
 
-	@NonNull
+	@Nonnull
 	@JsonProperty( "Amount" )
 	public BigDecimal getAmount()
 	{

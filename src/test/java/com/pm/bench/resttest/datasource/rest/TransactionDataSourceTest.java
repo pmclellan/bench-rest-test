@@ -27,6 +27,7 @@ import com.pm.bench.resttest.datasource.rest.TransactionDataSource;
 import com.pm.bench.resttest.transaction.Transaction;
 import com.pm.bench.resttest.transaction.TransactionPage;
 
+@SuppressWarnings( "null" )
 public class TransactionDataSourceTest
 {
 	private static final Function<Integer, String> URL_GENERATOR = ( i ) -> i + ".json";
@@ -56,7 +57,7 @@ public class TransactionDataSourceTest
 	}
 
 	@Test
-	public void shouldRequestFirstPageOfDataWhenRequested() throws Exception
+	public void shouldRequestFirstPageOfDataWhenGetDataIsInvoked() throws Exception
 	{
 		mockServer.expect( requestTo( URL_GENERATOR.apply( 1 ) ) ).andExpect( method( HttpMethod.GET ) )
 						.andRespond( withTransactionPage( 0, 1, 0 ) );

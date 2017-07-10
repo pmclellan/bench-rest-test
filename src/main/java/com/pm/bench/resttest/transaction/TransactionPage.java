@@ -2,8 +2,8 @@ package com.pm.bench.resttest.transaction;
 
 import java.util.List;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,7 +18,7 @@ public class TransactionPage
 	private final int totalCount;
 	private final int pageNumber;
 
-	@NonNull
+	@Nonnull
 	private final List<Transaction> transactions;
 
 	@JsonCreator
@@ -46,6 +46,7 @@ public class TransactionPage
 	}
 
 	@JsonProperty( "transactions" )
+	@Nonnull
 	public List<Transaction> getTransactions()
 	{
 		return transactions;

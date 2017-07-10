@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
+import javax.annotation.Nullable;
 
 import com.google.common.collect.ImmutableList;
 import com.pm.bench.resttest.PagedIterator.PageLoader;

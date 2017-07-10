@@ -7,10 +7,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.pm.bench.resttest.transaction.Transaction;
 
@@ -75,7 +76,7 @@ public class DailyBalanceCalculator implements Consumer<Transaction>
 	 * 
 	 * @return Map of daily balances, or empty map if not transactions have been consumed
 	 */
-	@NonNull
+	@Nonnull
 	public Map<LocalDate, BigDecimal> getTotals()
 	{
 		Map<LocalDate, BigDecimal> totals = new LinkedHashMap<>();

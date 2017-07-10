@@ -5,9 +5,10 @@ import static java.util.Objects.requireNonNull;
 import java.util.Iterator;
 import java.util.function.Function;
 
+import javax.annotation.Nonnull;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -32,8 +33,8 @@ public class TransactionDataSource
 	
 	@Autowired
 	public TransactionDataSource(
-		@NonNull final RestTemplate restTemplate,
-		@Qualifier( "urlGenerator" ) @NonNull final Function<Integer, String> urlGenerator )
+		@Nonnull final RestTemplate restTemplate,
+		@Qualifier( "urlGenerator" ) @Nonnull final Function<Integer, String> urlGenerator )
 	{
 		this.restTemplate = requireNonNull( restTemplate );
 		this.urlGenerator = requireNonNull( urlGenerator );

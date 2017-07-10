@@ -3,10 +3,11 @@ package com.pm.bench.resttest.calculation;
 import java.math.BigDecimal;
 import java.util.function.Consumer;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.pm.bench.resttest.transaction.Transaction;
 
@@ -20,6 +21,7 @@ public class TotalBalanceCalculator implements Consumer<Transaction>
 {
 	private static final Log LOG = LogFactory.getLog( TotalBalanceCalculator.class );
 	
+	@Nonnull
 	private BigDecimal total = BigDecimal.ZERO;
 
 	@Override
@@ -36,7 +38,7 @@ public class TotalBalanceCalculator implements Consumer<Transaction>
 		}
 	}
 	
-	@NonNull
+	@Nonnull
 	public BigDecimal getTotal()
 	{
 		return total;
