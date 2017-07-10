@@ -23,8 +23,8 @@ public class TransactionPage
 
 	@JsonCreator
 	public TransactionPage(
-		@JsonProperty( "totalCount" ) final int totalCount,
-		@JsonProperty( "page" ) final int pageNumber,
+		@JsonProperty( value = "totalCount", required = true ) final int totalCount,
+		@JsonProperty( value = "page", required = true ) final int pageNumber,
 		@JsonProperty( "transactions" ) @Nullable final List<Transaction> transactions )
 	{
 		this.totalCount = totalCount;

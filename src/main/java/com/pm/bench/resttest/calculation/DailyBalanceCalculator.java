@@ -7,6 +7,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -20,6 +22,8 @@ import com.pm.bench.resttest.transaction.Transaction;
  */
 public class DailyBalanceCalculator implements Consumer<Transaction>
 {
+	private static final Log LOG = LogFactory.getLog( DailyBalanceCalculator.class );
+	
 	private final Map<LocalDate, BigDecimal> dailyTotals = new HashMap<>();
 
 	private LocalDate startDate;
@@ -28,6 +32,11 @@ public class DailyBalanceCalculator implements Consumer<Transaction>
 	@Override
 	public void accept( @Nullable final Transaction transaction )
 	{
+		if ( LOG.isDebugEnabled() )
+		{
+			LOG.debug( String.format( "Consuming transaction [%s]", transaction ) );
+		}
+		
 		if ( transaction == null )
 		{
 			return;

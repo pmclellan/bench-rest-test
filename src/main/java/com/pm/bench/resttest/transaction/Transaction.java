@@ -24,8 +24,8 @@ public class Transaction
 
 	@JsonCreator
 	public Transaction(
-		@JsonProperty( "Date" ) @NonNull final LocalDate transactionDate,
-		@JsonProperty( "Amount" ) @NonNull final BigDecimal amount )
+		@JsonProperty( value = "Date", required = true ) @NonNull final LocalDate transactionDate,
+		@JsonProperty( value = "Amount", required = true ) @NonNull final BigDecimal amount )
 	{
 		this.transactionDate = requireNonNull( transactionDate );
 		this.amount = requireNonNull( amount );
