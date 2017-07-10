@@ -8,6 +8,12 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.pm.bench.resttest.transaction.Transaction;
 
+/**
+ * {@link Consumer} implementation that will calculate total of all {@link Transaction}s
+ * that it consumes.
+ * <p>
+ * <b>NOTE:</b> This class is not thread-safe.
+ */
 public class TotalBalanceCalculator implements Consumer<Transaction>
 {
 	private BigDecimal total = BigDecimal.ZERO;

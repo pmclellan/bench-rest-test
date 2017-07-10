@@ -10,6 +10,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.ImmutableList;
 
+/**
+ * This class represents a single page of transaction data
+ */
 public class TransactionPage
 {
 	private final int totalCount;

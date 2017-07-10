@@ -12,6 +12,12 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.pm.bench.resttest.transaction.Transaction;
 
+/**
+ * {@link Consumer} implementation that will calculate running daily balances from
+ * all {@link Transaction}s that it consumes.
+ * <p>
+ * <b>NOTE:</b> This class is not thread-safe.
+ */
 public class DailyBalanceCalculator implements Consumer<Transaction>
 {
 	private final Map<LocalDate, BigDecimal> dailyTotals = new HashMap<>();
@@ -51,6 +57,15 @@ public class DailyBalanceCalculator implements Consumer<Transaction>
 		}
 	}
 
+	/**
+	 * Returns a sorted map containing daily balances, in ascending date order, for dates between the oldest
+	 * and newest transactions that have been consumed. All dates between these bounds will be included
+	 * even if no transactions occurred on that date.
+	 * <p>
+	 * If not transactions have been consumed then an empty map will be returned.
+	 * 
+	 * @return Map of daily balances, or empty map if not transactions have been consumed
+	 */
 	@NonNull
 	public Map<LocalDate, BigDecimal> getTotals()
 	{

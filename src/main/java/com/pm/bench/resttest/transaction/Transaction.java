@@ -11,6 +11,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 
+/**
+ * This class represents a single financial transaction.
+ */
 public class Transaction
 {
 	@NonNull

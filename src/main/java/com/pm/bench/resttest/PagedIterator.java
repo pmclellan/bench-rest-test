@@ -10,6 +10,13 @@ import java.util.NoSuchElementException;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
+/**
+ * {@link Iterator} implementation that can be used to page through large data sets without having to
+ * load the entire content into memory. Instead, the data is loaded in chunks as the iterator moves
+ * through the collection.
+ * <p>
+ * <b>NOTE:</b> This class is not thread-safe.
+ */
 public class PagedIterator<T> implements Iterator<T>
 {
 	private final int totalElements;
@@ -39,7 +46,6 @@ public class PagedIterator<T> implements Iterator<T>
 	@Override
 	public T next()
 	{
-
 		if ( !hasNext() )
 		{
 			throw new NoSuchElementException();
@@ -68,6 +74,11 @@ public class PagedIterator<T> implements Iterator<T>
 		currentIndex = 0;
 	}
 
+	/**
+	 * A {@code PageLoader} implementation is responsible for fetching pages of data
+	 * as they are requested by a {@link PagedIterator}.
+	 */
+	@FunctionalInterface
 	public static interface PageLoader<T>
 	{
 		@Nullable
