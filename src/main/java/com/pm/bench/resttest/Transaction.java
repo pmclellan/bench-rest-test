@@ -11,13 +11,11 @@ public class Transaction
 {
 	@NonNull
 	private final LocalDate transactionDate;
-	
+
 	@NonNull
 	private final BigDecimal amount;
-	
-	public Transaction(
-			@NonNull final LocalDate transactionDate,
-			@NonNull final BigDecimal amount )
+
+	public Transaction( @NonNull final LocalDate transactionDate, @NonNull final BigDecimal amount )
 	{
 		this.transactionDate = requireNonNull( transactionDate );
 		this.amount = requireNonNull( amount );

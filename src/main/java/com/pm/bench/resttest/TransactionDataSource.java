@@ -10,45 +10,46 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import com.google.common.collect.ImmutableList;
 import com.pm.bench.resttest.PagedIterator.PageLoader;
 
-public class TransactionDataSource {
+public class TransactionDataSource
+{
 	private static final LocalDate TODAY = LocalDate.now();
-	private static final LocalDate TOMORROW = TODAY.plusDays(1);
-	private static final LocalDate TODAY_PLUS_FIVE = TODAY.plusDays(5);
-	private static final LocalDate TODAY_PLUS_EIGHT = TODAY.plusDays(8);
+	private static final LocalDate TOMORROW = TODAY.plusDays( 1 );
+	private static final LocalDate TODAY_PLUS_FIVE = TODAY.plusDays( 5 );
+	private static final LocalDate TODAY_PLUS_EIGHT = TODAY.plusDays( 8 );
 
-	private final List<Transaction> data =
-			ImmutableList.of(
-					new Transaction(TODAY, new BigDecimal("10.10")),
-			new Transaction(TODAY, new BigDecimal("10.10")),
-			new Transaction(TOMORROW, new BigDecimal("10.10")),
-			new Transaction(TOMORROW, new BigDecimal("10.10")),
-			new Transaction(TODAY, new BigDecimal("10.10")),
-			new Transaction(TODAY_PLUS_FIVE, new BigDecimal("10.100")),
-			new Transaction(TODAY_PLUS_FIVE, new BigDecimal("10.10")),
-			new Transaction(TODAY_PLUS_FIVE, new BigDecimal("10.10")),
-			new Transaction(TODAY_PLUS_EIGHT, new BigDecimal("10.10")));
+	private final List<Transaction> data = ImmutableList.of(
+		new Transaction( TODAY, new BigDecimal( "10.10" ) ),
+		new Transaction( TODAY, new BigDecimal( "10.10" ) ),
+		new Transaction( TOMORROW, new BigDecimal( "10.10" ) ),
+		new Transaction( TOMORROW, new BigDecimal( "10.10" ) ),
+		new Transaction( TODAY, new BigDecimal( "10.10" ) ),
+		new Transaction( TODAY_PLUS_FIVE, new BigDecimal( "10.100" ) ),
+		new Transaction( TODAY_PLUS_FIVE, new BigDecimal( "10.10" ) ),
+		new Transaction( TODAY_PLUS_FIVE, new BigDecimal( "10.10" ) ),
+		new Transaction( TODAY_PLUS_EIGHT, new BigDecimal( "10.10" ) ) );
 
-	private final PageLoader<Transaction> loader = new PageLoader<Transaction>() {
-
-		@Override
-		public @Nullable List<Transaction> getPage( int pageNumber ) {
-			
-			if ( pageNumber == 2 )
+	private final PageLoader<Transaction> loader = new PageLoader<Transaction>()
+		{
+			@Override
+			public @Nullable List<Transaction> getPage( int pageNumber )
 			{
-				return data.subList( 4, 8 );
+				if ( pageNumber == 2 )
+				{
+					return data.subList( 4, 8 );
+				}
+				else if ( pageNumber == 3 )
+				{
+					return data.subList( 8, 9 );
+				}
+				else
+				{
+					return null;
+				}
 			}
-			else if ( pageNumber == 3 )
-			{
-				return data.subList( 8, 9 );
-			}
-			else
-			{
-				return null;
-			}
-		}
-	};
+		};
 
-	public Iterator<Transaction> getData() {
-		return new PagedIterator<Transaction>(data.size(), data.subList(0, 4), loader );
+	public Iterator<Transaction> getData()
+	{
+		return new PagedIterator<Transaction>( data.size(), data.subList( 0, 4 ), loader );
 	}
 }
