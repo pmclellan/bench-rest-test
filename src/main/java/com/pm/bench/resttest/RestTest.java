@@ -1,5 +1,7 @@
 package com.pm.bench.resttest;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
@@ -14,6 +16,8 @@ import com.pm.bench.resttest.datasource.rest.TransactionDataSource;
 @Component
 public class RestTest
 {
+	private static final Log LOG = LogFactory.getLog( TransactionDataSource.class );
+	
 	private final TransactionDataSource dataSource;
 
 	@Autowired
@@ -39,16 +43,19 @@ public class RestTest
 		}
 		catch ( MalformedDataException mfde )
 		{
+			LOG.error( mfde.getMessage(), mfde );
 			System.out.println( "Invalid transaction data received from source. Calculation failed." );
 			return;
 		}
 		catch ( DataSourceException dse )
 		{
-			System.out.println( "Failed to retrieve required transaction data from source. Calculation failed." );
+			LOG.error( dse.getMessage(), dse );
+			System.out.println( "Failed to obtain transaction data from source. Calculation failed." );
 			return;
 		}
 		catch ( RuntimeException re )
 		{
+			LOG.error( re.getMessage(), re );
 			System.out.println( "Unexpected error occured while processing transaction data. Calculation failed." );
 			return;
 		}

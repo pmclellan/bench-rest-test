@@ -121,6 +121,42 @@ public class TransactionDataSourceTest
 		dataSource.getData();
 	}
 
+	@Test( expected = MalformedDataException.class )
+	public void shouldThrowMalformedDataExceptionWhenTotalCountIsNegative() throws Exception
+	{
+		mockServer.expect( requestTo( URL_GENERATOR.apply( 1 ) ) ).andExpect( method( HttpMethod.GET ) )
+						.andRespond( withTransactionPage( -1, 1, 0 ) );
+		dataSource.getData();
+	}
+
+	@Test( expected = MalformedDataException.class )
+	public void shouldThrowMalformedDataExceptionWhenTotalCountChanges() throws Exception
+	{
+		mockServer.expect( requestTo( URL_GENERATOR.apply( 1 ) ) ).andExpect( method( HttpMethod.GET ) )
+						.andRespond( withTransactionPage( 3, 1, 1 ) );
+		
+		// Second page returns different total transaction count from first
+		mockServer.expect( requestTo( URL_GENERATOR.apply( 2 ) ) ).andExpect( method( HttpMethod.GET ) )
+						.andRespond( withTransactionPage( 5, 2, 2 ) );
+		
+		Iterator<Transaction> data = dataSource.getData();
+		Iterators.advance( data, 3 );
+	}
+
+	@Test( expected = MalformedDataException.class )
+	public void shouldThrowMalformedDataExceptionWhenPageNumberIsInvalid() throws Exception
+	{
+		mockServer.expect( requestTo( URL_GENERATOR.apply( 1 ) ) ).andExpect( method( HttpMethod.GET ) )
+						.andRespond( withTransactionPage( 3, 1, 1 ) );
+		
+		// Number of second page returned does not match expected value
+		mockServer.expect( requestTo( URL_GENERATOR.apply( 2 ) ) ).andExpect( method( HttpMethod.GET ) )
+						.andRespond( withTransactionPage( 3, 3, 2 ) );
+		
+		Iterator<Transaction> data = dataSource.getData();
+		Iterators.advance( data, 3 );
+	}
+
 	private DefaultResponseCreator withTransactionPage( int totalCount, int pageNumber, int numTransactions )
 					throws JsonProcessingException
 	{
